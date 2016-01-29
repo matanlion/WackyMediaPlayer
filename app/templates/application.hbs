@@ -1,3 +1,30 @@
-<h2 id="title">Welcome to Ember</h2>
+<div class="container-fluid" style="background-color:#F44336;color:#fff;height:120px;">
+  <h1>Wacky Media Player <span class="glyphicon glyphicon-fire"></span></h1>
+  <h3>Your Music Hub</h3>
+</div>
 
-{{outlet}}
+<nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="120" style="z-index:9000;">
+  <ul class="nav navbar-nav">
+    <li>{{#link-to "index" class="active"}}Home{{/link-to}}</li>
+    <li>{{#link-to "playlist"}}Playlist{{/link-to}}</li>
+    <li>{{#link-to "search"}}Search{{/link-to}}</li>
+    <li>{{#link-to "about"}}About{{/link-to}}</li>
+  </ul>
+</nav>
+
+<div class="container" id="content">
+  {{outlet}}
+</div>
+
+<footer class="navbar navbar-inverse navbar-fixed-bottom" style="color: #f5f5f5; padding: 32px;">
+      <div class="container-fluid text-center">
+		  	<p><span class="glyphicon glyphicon-fire"></span> Wacky Media Player © 2016</p> 
+      </div>
+</footer>
+
+<!-- Notification Modal -->
+<div class="modal fade" id="notificationModal" role="dialog">
+	<div class="modal-dialog alert alert-success">
+		{{notificationContent}}
+	</div>
+</div>

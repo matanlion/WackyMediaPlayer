@@ -1,0 +1,27 @@
+{{#if isEmpty}}
+	<div class="well well-lg player">
+		There are no songs yet in your playlist. Why don't you {{#link-to 'search'}}add some?{{/link-to}}
+	</div>
+{{else}}
+	<div class="row well well-lg player">
+		<div class="col-md-6">
+			{{outlet}} 
+		</div>
+		<div class="col-md-6 panel-group">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4>{{model.title}}</h4>
+				</div>
+				<div class="panel-body">
+					<ul class="pre-scrollable" style="padding:0;" class="playlist">
+						{{#each model.videoItems as |video|}}
+							{{#video-desc videoItem=video titleClicked="PlayVideoRoute"}}
+								<h4><span class = "btn btn-danger glyphicon glyphicon-remove" {{action 'RemoveFromPlaylist' video}}></span></h4>
+							{{/video-desc}}
+						{{/each}}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+{{/if}}

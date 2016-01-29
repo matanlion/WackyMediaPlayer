@@ -1,0 +1,61 @@
+<!--Search Panel -->
+<div class="input-group well well-lg">
+	{{input type="text" class="form-control" value=query }}
+	<span class="input-group-addon btn btn-default" data-toggle="modal" data-target="#advancedModal">...</span>
+	<span class="input-group-addon btn btn-default" {{action "findVideos"}}>Search</span>
+</div>
+
+<!--Search Results -->
+<ul class = "list-group">
+	{{#each model.sortedContent as |video|}}
+			{{#video-desc videoItem=video titleClicked="PlayVideo"}}
+				<div class="input-group">
+					<h4>
+					{{#if video.inPlaylist}}
+						<span class = "btn btn-danger glyphicon glyphicon-remove" {{action 'RemoveFromPlaylist' video}}></span>
+					{{else}}
+						<span class = "btn btn-success glyphicon glyphicon-ok" {{action 'AddToPlaylist' video}}></span>
+					{{/if}}
+					</h4>
+				</div>
+			{{/video-desc}}
+	{{/each}}
+</ul>
+
+<!--Player Modal -->
+<div class="modal fade" id="playerModal" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				{{youtube-video-player videoItem=selectedVideoItem autoPlay=false}}
+			</div>
+		</div>
+	</div>
+</div>
+
+  <!-- Advanced options Modal -->
+<div>
+  <div class="modal fade" id="advancedModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Sort By</h4>
+        </div>
+        <div class="modal-body">
+			<div class="row input-group">
+				<span class = "input-group-addon btn btn-default" {{action 'SortResults' 'title'}}>Title</span>
+				<span class = "input-group-addon btn btn-default" {{action 'SortResults' 'publishedAt'}}>Published At</span>
+				<span class = "input-group-addon btn btn-default" {{action 'SortResults' 'description'}}>Description</span>
+			</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
