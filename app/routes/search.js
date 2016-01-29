@@ -58,13 +58,13 @@ export default Ember.Route.extend({
 			var playListRoute = this.modelFor('application');
 			var isItemExists = playListRoute.videoItems.findBy('videoId',videoItem.videoId);
 			playListRoute.Add(videoItem);
-			this.send('Notify','Video Added!');
+			this.send('Notify', videoItem.title + ' added to playlist!', true);
 		},
 		RemoveFromPlaylist: function(videoItem) {
 			var playListRoute = this.modelFor('application');
 			var isItemExists = playListRoute.videoItems.findBy('videoId',videoItem.videoId);
 			playListRoute.Remove(videoItem);
-			this.send('Notify', 'Video Removed!');
+			this.send('Notify', videoItem.title + ' removed from playlist!', false);
 
 		},
 		PlayVideo: function(params)

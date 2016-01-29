@@ -65,6 +65,10 @@
 	background-color: white;
 }
 
+.panel-body {
+	padding: 0;
+}
+
 .playlist > li.active,
 .playlist > li:focus,
 .playlist > li:hover {

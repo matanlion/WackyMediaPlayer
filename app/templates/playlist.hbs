@@ -1,25 +1,28 @@
+<!-- show playlist items if exist -->
 {{#if isEmpty}}
+	<!-- no items exist -->
 	<div class="well well-lg player">
 		There are no songs yet in your playlist. Why don't you {{#link-to 'search'}}add some?{{/link-to}}
 	</div>
 {{else}}
+	<!-- show items -->
 	<div class="row well well-lg player">
+		<!-- reserved to player (play template) -->
 		<div class="col-md-6">
 			{{outlet}} 
 		</div>
+		<!-- playlist -->
 		<div class="col-md-6 panel-group">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h4>{{model.title}}</h4>
+					<h4>{{model.title}} ({{model.videoItems.length}})</h4>
 				</div>
-				<div class="panel-body">
-					<ul class="pre-scrollable" style="padding:0;" class="playlist">
+				<div class="panel-body pre-scrollable playlist">
 						{{#each model.videoItems as |video|}}
 							{{#video-desc videoItem=video titleClicked="PlayVideoRoute"}}
-								<h4><span class = "btn btn-danger glyphicon glyphicon-remove" {{action 'RemoveFromPlaylist' video}}></span></h4>
+								<h4><span class = "btn btn-danger glyphicon glyphicon-remove" {{action 'RemoveFromPlaylist' video isSuccess}}></span></h4>
 							{{/video-desc}}
 						{{/each}}
-					</ul>
 				</div>
 			</div>
 		</div>

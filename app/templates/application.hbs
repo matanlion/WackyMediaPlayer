@@ -5,7 +5,7 @@
 
 <nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="120" style="z-index:9000;">
   <ul class="nav navbar-nav">
-    <li>{{#link-to "index" class="active"}}Home{{/link-to}}</li>
+    <li>{{#link-to "index"}}Home{{/link-to}}</li>
     <li>{{#link-to "playlist"}}Playlist{{/link-to}}</li>
     <li>{{#link-to "search"}}Search{{/link-to}}</li>
     <li>{{#link-to "about"}}About{{/link-to}}</li>
@@ -24,7 +24,9 @@
 
 <!-- Notification Modal -->
 <div class="modal fade" id="notificationModal" role="dialog">
-	<div class="modal-dialog alert alert-success">
+	<div class="modal-dialog">
+    <div class="{{if isNotificationSuccess 'alert alert-success' 'alert alert-info'}}">
 		{{notificationContent}}
+    </div>
 	</div>
 </div>

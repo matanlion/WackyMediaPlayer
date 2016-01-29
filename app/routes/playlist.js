@@ -8,7 +8,7 @@ export default Ember.Route.extend({
 		RemoveFromPlaylist: function(videoItem) {
 			var playlist = this.modelFor('application')
 			playlist.Remove(videoItem);
-			this.send('Notify', 'Video Removed!');
+			this.send('Notify',  videoItem.title + ' removed from playlist!', false);
 		},
 		PlayVideoRoute: function(params){
 			var videoItem = params.videoItem;
