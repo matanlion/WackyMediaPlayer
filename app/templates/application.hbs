@@ -1,24 +1,28 @@
-<div class="container-fluid" style="background-color:#F44336;color:#fff;height:120px;">
+<!-- Fixed Header -->
+<div id="header-fixed" class="container-fluid">
   <h1>Wacky Media Player <span class="glyphicon glyphicon-fire"></span></h1>
   <h3>Your Music Hub</h3>
 </div>
 
-<nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="120" style="z-index:9000;">
+<!-- Affix Header -->
+<nav id="header-affix" class="navbar navbar-inverse" data-spy="affix" data-offset-top="120">
   <ul class="nav navbar-nav">
-    <li>{{#link-to "index"}}Home{{/link-to}}</li>
+    <li>{{#link-to "index" class="active"}}Home{{/link-to}}</li>
     <li>{{#link-to "playlist"}}Playlist{{/link-to}}</li>
     <li>{{#link-to "search"}}Search{{/link-to}}</li>
     <li>{{#link-to "about"}}About{{/link-to}}</li>
   </ul>
 </nav>
 
+<!-- Body -->
 <div class="container" id="content">
   {{outlet}}
 </div>
 
-<footer class="navbar navbar-inverse navbar-fixed-bottom" style="color: #f5f5f5; padding: 32px;">
+<!-- Footer -->
+<footer class="navbar navbar-inverse navbar-fixed-bottom">
       <div class="container-fluid text-center">
-		  	<p><span class="glyphicon glyphicon-fire"></span> Wacky Media Player © 2016</p> 
+		  	<p><span class="glyphicon glyphicon-fire wacky-logo"></span> Wacky Media Player © 2016</p> 
       </div>
 </footer>
 
@@ -26,7 +30,7 @@
 <div class="modal fade" id="notificationModal" role="dialog">
 	<div class="modal-dialog">
     <div class="{{if isNotificationSuccess 'alert alert-success' 'alert alert-info'}}">
-		{{notificationContent}}
+		  {{notificationContent}}
     </div>
 	</div>
 </div>

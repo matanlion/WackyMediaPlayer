@@ -1,4 +1,6 @@
-import DS from 'ember-data';
+/* Represents video object */
+
+import Ember from 'ember';
 
 export default Ember.Object.extend({
   	videoId: '',

@@ -1,3 +1,4 @@
+<!-- video description template -->
 <div class="row">
 	<div class="thumbnail col-sm-2">
 		<img src={{videoItem.thumbnails}}>
@@ -7,7 +8,11 @@
 			{{yield}}
 		</div>
 		<h4><a class="list-group-item-heading" {{action "titleClick"}}>{{videoItem.title}}</a></h4>
-		<p class="list-group-item-text">{{videoItem.description}}</p>
-		<p class="list-group-item-text">{{videoItem.publishedAt}}</p>
+		{{#if includeDesc}}
+			<p class="list-group-item-text">{{videoItem.description}}</p>
+		{{/if}}
+		{{#if includePublishAt}}
+			<br><p class="list-group-item-text">Published At: {{videoItem.publishedAt}}</p>
+		{{/if}}
 	</div>
 </div>

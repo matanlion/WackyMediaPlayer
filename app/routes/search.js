@@ -1,72 +1,68 @@
+/* Represents a search route
+Enables searching, playing & listing youtube videos */
+
 import Ember from 'ember';
 import Video from '../models/video';
-
-Ember.Binding.from("App.searchResultsCollection").to("value");
-
-var searchResultsCollection = Ember.Object.extend({
-	content: [],
-	sortProperties: ['title:desc'],
-	sortedContent: Ember.computed.sort('content', 'sortProperties'),
-
-	myFunction: function() {
-    console.log(App.myController.get('someProperty')); // should print 'hello'
-  }
-});
-var searchResults = searchResultsCollection.create();
-
+import Collection from '../models/collection';
 const API_PATH = 'https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&videoEmbeddable=true&maxResults=50&key=AIzaSyDNZfFrO50jqog8ZXYaeiJIFYMfY9IPxDw&q=';
+
+var searchResults = Collection.create();
 
 export default Ember.Route.extend({
 
+	//model hook - search results collection
 	model: function() {
 		return searchResults;
 	},
 
 	actions: {
+		//Sort search collection results by sortBy options provided
 		SortResults: function(sortBy) {
-			var a= sortBy+':desc';
-			searchResults.set('sortProperties', [a]);
+			var sortOptions = sortBy !== 'auto' ? sortBy+':desc' : "";
+			searchResults.set('sortProperties', [sortOptions]);
 		},
+		//Find videos using youtube api
 		findVideos: function() {
-
-			searchResults.content.clear();
+			searchResults.content.clear();	//clear previous results
 			var controller = this.get('controller');			
-			var query = controller.get('query');
-			var playList = this.modelFor('application');
+			var query = controller.get('query');	//get user query
+			var playList = this.modelFor('application');	//get playlist
+			//send search request to server
 			$.getJSON(API_PATH + query)
 			.then(function(response) {
-				
-				response.items.forEach(function(videoItem) {
+				//on response initiate video item object & add to current results
+				response.items.forEach(function(respnseVideoItem) {
 					var videoItem = Video.create({
-						videoId : videoItem.id.videoId,
-						title : videoItem.snippet.title,
-						thumbnails : videoItem.snippet.thumbnails.high.url,
-						description : videoItem.snippet.description,
-						publishedAt : videoItem.snippet.publishedAt
+						videoId : respnseVideoItem.id.videoId,
+						title : respnseVideoItem.snippet.title,
+						thumbnails : respnseVideoItem.snippet.thumbnails.high.url,
+						description : respnseVideoItem.snippet.description,
+						publishedAt : respnseVideoItem.snippet.publishedAt
 					});
-
-
+					//flag items already included in playlist
 					var isItemExists = playList.videoItems.findBy('videoId',videoItem.videoId);
 					videoItem.inPlaylist = isItemExists ? true : false;
 
+					//insert to results
 					searchResults.content.pushObject(videoItem);
 				}); 
 			});
 
 		},
+		//Add video item to playlist
 		AddToPlaylist: function(videoItem) {
 			var playListRoute = this.modelFor('application');
-			var isItemExists = playListRoute.videoItems.findBy('videoId',videoItem.videoId);
-			playListRoute.Add(videoItem);
-			this.send('Notify', videoItem.title + ' added to playlist!', true);
+			playListRoute.Add(videoItem);	//add video item to playlist
+			this.send('Notify', videoItem.title + ' added to playlist!', true);	//notify user
 		},
+		//Remove video item from playlist
 		RemoveFromPlaylist: function(videoItem) {
 			var playListRoute = this.modelFor('application');
-			var isItemExists = playListRoute.videoItems.findBy('videoId',videoItem.videoId);
-			playListRoute.Remove(videoItem);
-			this.send('Notify', videoItem.title + ' removed from playlist!', false);
+			playListRoute.Remove(videoItem);	//remove video item from playlist
+			this.send('Notify', videoItem.title + ' removed from playlist!', false); //notify user
 
 		},
+		//Play selected video item in modal
 		PlayVideo: function(params)
 		{
 			$('#playerModal').modal('show');

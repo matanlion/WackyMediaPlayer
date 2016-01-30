@@ -1,21 +1,10 @@
-var contentSecurityPolicy = {
-'default-src': "'none'",
-'script-src': "'self'",
-'font-src': "'self'",
-'connect-src': "'self' localhost:* https://www.googleapis.com/youtube/v3:*",
-'img-src': "'self'",
-'style-src': "'self' 'unsafe-inline'",
-'media-src': "'self'"
-};
 /* jshint node: true */
 module.exports = function(environment) {
   var ENV = {
-    contentSecurityPolicy: contentSecurityPolicy,
     modulePrefix: 'wacky-media-player',
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
-    apiHost: 'https://www.googleapis.com/youtube/v3',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -36,8 +25,6 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
-    ENV.contentSecurityPolicy = contentSecurityPolicy;
-    ENV.contentSecurityPolicy['script-src'] = "'self' 'unsafe-eval'";
   }
 
   if (environment === 'test') {

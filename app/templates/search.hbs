@@ -1,8 +1,12 @@
 <!--Search Panel -->
-<div class="input-group well well-lg">
-	{{input type="text" class="form-control" value=query }}
-	<span class="input-group-addon btn btn-default" data-toggle="modal" data-target="#advancedModal">...</span>
-	<span class="input-group-addon btn btn-default" {{action "findVideos"}}>Search</span>
+<div class="well well-lg">
+	<span class="input-group">
+		{{input type="text" class="form-control" value=query}}
+		<span class="input-group-btn">
+			<button class="btn btn-secondary btn btn-default" type="button" data-toggle="modal" data-target="#advancedModal">...</button>
+			<button class="btn btn-secondary btn btn-default" type="button" disabled={{isQueryEmpty}} {{action "findVideos"}}><span class="glyphicon glyphicon-search"></span></button>
+		</span>
+	</span>
 </div>
 
 <!--Search Results -->
@@ -11,11 +15,11 @@
 			{{#video-desc videoItem=video titleClicked="PlayVideo"}}
 				<div class="input-group">
 					<h4>
-					{{#if video.inPlaylist}}
-						<span class = "btn btn-danger glyphicon glyphicon-remove" {{action 'RemoveFromPlaylist' video}}></span>
-					{{else}}
-						<span class = "btn btn-success glyphicon glyphicon-ok" {{action 'AddToPlaylist' video}}></span>
-					{{/if}}
+						{{#if video.inPlaylist}}
+							<span class = "btn btn-danger glyphicon glyphicon-remove" {{action 'RemoveFromPlaylist' video}}></span>
+						{{else}}
+							<span class = "btn btn-success glyphicon glyphicon-ok" {{action 'AddToPlaylist' video}}></span>
+						{{/if}}
 					</h4>
 				</div>
 			{{/video-desc}}
@@ -36,7 +40,7 @@
 	</div>
 </div>
 
-  <!-- Advanced options Modal -->
+<!-- Advanced options Modal -->
 <div>
   <div class="modal fade" id="advancedModal" role="dialog">
     <div class="modal-dialog modal-sm">
@@ -47,9 +51,9 @@
         </div>
         <div class="modal-body">
 			<div class="row input-group">
+				<span class = "input-group-addon btn btn-default" {{action 'SortResults' 'auto'}}>Auto</span>
 				<span class = "input-group-addon btn btn-default" {{action 'SortResults' 'title'}}>Title</span>
 				<span class = "input-group-addon btn btn-default" {{action 'SortResults' 'publishedAt'}}>Published At</span>
-				<span class = "input-group-addon btn btn-default" {{action 'SortResults' 'description'}}>Description</span>
 			</div>
         </div>
         <div class="modal-footer">

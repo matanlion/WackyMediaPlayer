@@ -1,14 +1,17 @@
+/* Represents the root application route */
+
 import Ember from 'ember';
 import Playlist from '../models/playlist';
 
-/*Create playlist element in application route to provide
+/*Creates a playlist object to provide
 access to both playlist and search routes*/
 var playlist = Playlist.create({ title: "My Playlist" });
 
 export default Ember.Route.extend({
 
+	//model hook - playlist collection
 	model: function() {
-		return playlist; //hook playlist element
+		return playlist; 
 	},
 	actions: {
 		/* User notifications via modal message */
