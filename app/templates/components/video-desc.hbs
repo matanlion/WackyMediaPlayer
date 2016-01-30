@@ -12,7 +12,7 @@
 			<p class="list-group-item-text">{{videoItem.description}}</p>
 		{{/if}}
 		{{#if includePublishAt}}
-			<br><p class="list-group-item-text">Published At: {{videoItem.publishedAt}}</p>
+			<br><p class="list-group-item-text">Published At: {{moment-format videoItem.publishedAt}}</p>
 		{{/if}}
 	</div>
 </div>

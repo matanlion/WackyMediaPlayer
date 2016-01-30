@@ -1,7 +1,7 @@
 <!--Search Panel -->
 <div class="well well-lg">
 	<span class="input-group">
-		{{input type="text" class="form-control" value=query}}
+		{{input type="text" class="form-control" value=query insert-newline='findVideos'}}
 		<span class="input-group-btn">
 			<button class="btn btn-secondary btn btn-default" type="button" data-toggle="modal" data-target="#advancedModal">...</button>
 			<button class="btn btn-secondary btn btn-default" type="button" disabled={{isQueryEmpty}} {{action "findVideos"}}><span class="glyphicon glyphicon-search"></span></button>

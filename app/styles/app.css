@@ -91,6 +91,10 @@
   background-color: #f6f6f6;
 }
 
+.list-group-item-heading {
+	cursor:pointer;
+}
+
 .marged {
 	margin-left: 10%;
 	margin-right: 10%;

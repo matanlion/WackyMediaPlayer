@@ -19,12 +19,12 @@
 					<span class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#editTitleModal"></span></h4>
 				</div>
 				<div class="panel-body pre-scrollable playlist">
-						{{#each model.videoItems as |video|}}
-							{{#video-desc videoItem=video includeDesc=false includePublishAt=false}}
-								{{#link-to 'playlist.play' video.videoId class="btn btn-success glyphicon glyphicon-play"}}{{/link-to}}
-								<h4><span class = "btn btn-danger glyphicon glyphicon-remove" {{action 'RemoveFromPlaylist' video isSuccess}}></span></h4>
-							{{/video-desc}}
-						{{/each}}
+					{{#each model.videoItems as |video|}}
+						{{#video-desc videoItem=video includeDesc=false includePublishAt=false}}
+							{{#link-to 'playlist.play' video.videoId class="btn btn-success glyphicon glyphicon-play"}}{{/link-to}}
+							<h4><span class = "btn btn-danger glyphicon glyphicon-remove" {{action 'RemoveFromPlaylist' video isSuccess}}></span></h4>
+						{{/video-desc}}
+					{{/each}}
 				</div>
 			</div>
 		</div>
@@ -44,7 +44,8 @@
 				{{input type="text" class="form-control" value=playlistName}}
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal" {{action 'SetPlaylistName'}}>Close</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" {{action 'SetPlaylistName'}}>Apply</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
         </div>
       </div>
     </div>
