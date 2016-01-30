@@ -27,6 +27,10 @@ export default Ember.Route.extend({
 			var controller = this.get('controller');			
 			var query = controller.get('query');	//get user query
 			var playList = this.modelFor('application');	//get playlist
+
+			//Non empty search query assertion
+			if (Ember.isEmpty(query)) { return; }
+
 			//send search request to server
 			$.getJSON(API_PATH + query)
 			.then(function(response) {
